@@ -1,0 +1,38 @@
+#!/usr/bin/python
+"""
+================================================================================
+For assistance converting from standard h:mm time formats to the weird xero
+ decimal format.
+
+To use, call from commandline and enter one or more periods in time in h:mm
+ format. E.g.
+
+    timecalc 1:30 2:00 0:15
+    # or
+    tc 1:30 2:00 0:15
+
+Timecalc will add the times up and print them out in decimal format. E.g.
+
+    3.75
+
+================================================================================
+"""
+
+from __future__ import print_function
+
+def main(times):
+    total_minutes = 0
+    for time in times:
+        hours, minutes = time.split(":", 1)
+        assert len(minutes) == 2, "Minutes must be 2 digits"
+        total_minutes += int(minutes) + int(hours) * 60
+
+    print(total_minutes/60.0)
+
+if __name__ == "__main__":
+    import sys
+    try:
+        main(sys.argv[1:])
+    except Exception:
+        print(__doc__)
+        raise

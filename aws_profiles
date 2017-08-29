@@ -1,0 +1,54 @@
+#!/usr/bin/python
+"""
+================================================================================
+Reminds you what your AWS profiles are and how to set them.
+
+Runs through your ~/.aws/credentials file and returns the names of every profile
+listed.
+================================================================================
+"""
+
+from __future__ import print_function
+import re
+from os.path import expanduser
+from os import environ
+
+PATH = expanduser("~/.aws/credentials")
+
+profile_name = re.compile("^\[(.*)\]")
+
+def find_curr_profile():
+    try:
+        return environ["AWS_PROFILE"]
+    except KeyError:
+        return "-- No current profile in ENV --"
+
+def read_profiles(config_file):
+    with open(config_file, 'r') as f:
+        for line in f.readlines():
+            match = profile_name.match(line)
+            if match:
+                yield match.groups()[0]
+
+
+if __name__ == '__main__':
+    try:
+        curr_profile = find_curr_profile()
+        profiles = list(read_profiles(PATH))
+    except Exception:
+        print(__doc__)
+        raise
+
+    print()
+    print("Current Profile:")
+    print("  ", curr_profile)
+    print()
+    print("Known Profiles:")
+    for profile in profiles:
+        print("  ", profile)
+
+    print()
+    print("Choose your profile with:")
+    print()
+    print("  export AWS_PROFILE=<profile>")
+    print()
