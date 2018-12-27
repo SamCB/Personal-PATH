@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+source .env
+aws --profile=$VPN_AWS_PROFILE --region=$VPN_AWS_REGION \
+    ec2 start-instance \
+    --instance-ids=$VPN_INSTANCE_ID

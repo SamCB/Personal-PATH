@@ -1,0 +1,41 @@
+#!/usr/bin/python
+# coding=utf-8
+"""
+================================================================================
+You're telling me you still can't remember the aws regions?
+================================================================================
+"""
+from __future__ import print_function
+
+REGIONS = [
+    ('us-east-1', 'US (N. Virginia)'),
+    ('us-east-2', 'US (Ohio)'),
+    ('us-west-1', 'US (N.California)'),
+    ('us-west-2', 'US (Oregon)'),
+    ('ca-central-1', 'Cananda (Central)'),
+    ('eu-west-1', 'EU (Ireland)'),
+    ('eu-west-2', 'EU (London)'),
+    ('eu-central-1', 'EU (Frankfurt)'),
+    ('ap-northeast-1', 'Asia Pacific (Tokyo)'),
+    ('ap-northeast-2', 'Asia Pacific (Seoul)'),
+    ('ap-southeast-1', 'Asia Pacific (Singapore)'),
+    ('ap-southeast-2', 'Asia Pacific (Sydney)'),
+    ('ap-south-1', 'Asia Pacific (Mumbai)'),
+    ('sa-east-1', 'South America (São Paulo)')
+]
+
+I_WANT = REGIONS[11]
+
+def print_region(region):
+    print("  {:15} - {}".format(region[0], region[1]))
+
+print("Hi Sam. You Probably Want:")
+print()
+print_region(I_WANT)
+print()
+print("All regions:")
+print()
+for region in REGIONS:
+    print_region(region)
+print()
+
