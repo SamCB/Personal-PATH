@@ -2,5 +2,5 @@
 
 source .env
 aws --profile=$VPN_AWS_PROFILE --region=$VPN_AWS_REGION \
-    ec2 stop-instance \
+    ec2 stop-instances \
     --instance-ids=$VPN_INSTANCE_ID
