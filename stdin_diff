@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+tempA=$(mktemp)
+tempB=$(mktemp)
+
+ENDLINE=EOF
+
+echo Enter first file and close with "$ENDLINE"
+
+while IFS= read -r line; do
+    if [ "$line" = "$ENDLINE" ] ; then
+        break
+    fi
+    echo $line >> $tempA
+done
+
+echo Enter second file and close with "$ENDLINE"
+
+while IFS= read -r line; do
+    if [ "$line" = "$ENDLINE" ] ; then
+        break
+    fi
+    echo $line >> $tempB
+done
+
+diff $@ $tempA $tempB

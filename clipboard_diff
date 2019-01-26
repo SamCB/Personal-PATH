@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+tempA=$(mktemp)
+tempB=$(mktemp)
+
+echo Copy your first bit of text to clipboard then press enter to save it
+read
+pbpaste > $tempA
+
+echo Copy your second bit of text to clipboard then press enter to save it
+read
+pbpaste > $tempB
+
+diff $@ $tempA $tempB
